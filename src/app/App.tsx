@@ -112,7 +112,8 @@ export default function App() {
     }
   };
 
-  // Auto-cycle pages every 3 seconds
+  // Auto-cycle pages (interval in ms – longer = card stays visible longer)
+  const AUTO_CYCLE_MS = 12000; // 12 seconds
   useEffect(() => {
     if (totalPages <= 1 || isTooltipVisible) return; // Don't cycle if only one page or tooltip is visible
     
@@ -121,7 +122,7 @@ export default function App() {
         if (prev >= totalPages) return 1;
         return prev + 1;
       });
-    }, 5000);
+    }, AUTO_CYCLE_MS);
     
     return () => clearInterval(interval);
   }, [totalPages, isTooltipVisible]);
